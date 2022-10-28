@@ -42,7 +42,7 @@ def next_term(a):
 
 
 def is_valid_tictactoe(board):
-    """Return if the tictactoe board is good or Not
+    """Return if the tictactoe board is good or not
         :param board (list) the list containing the tictactoe board
         :return res (bool) if the board is good or not"""
 
