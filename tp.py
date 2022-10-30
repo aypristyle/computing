@@ -1,5 +1,3 @@
-import array as arr
-
 def the_sequence(n):
     """Return the n firsts number of the sequence
         :param n (int): the number of terms that we want to return
