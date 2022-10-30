@@ -1,3 +1,5 @@
+import array as arr
+
 def the_sequence(n):
     """Return the n firsts number of the sequence
         :param n (int): the number of terms that we want to return
@@ -9,16 +11,19 @@ def the_sequence(n):
 
 
 def is_valid_sudoku(board):
-    """Return if the sudoku board is good or Not
+    """Return if the sudoku board is good or not
         :param board (list) the list containing the sudoku board
         :return res (bool) if the board is good or not"""
     for i in range(9):
-        # verify the columns
+        # col = regroup the i^th colomn
+        # box = regroup the i^th 3 x 3 sub-boxe 
         col = [board[k][i] for k in range(9)]
+        box = [board[(k%3)+3*(i//3)][(k//3)+3*(i%3)] for k in range(9)]
         for j in range(9):
-            # verify the lines
-            if board[i].count(j) > 1 or col.count(j) > 1:
+            # verify there is no tuples
+            if board[i].count(j) > 1 or col.count(j) > 1 or box.count(j) > 1:
                 return False
+    return True
 
 
 def next_term(a):
@@ -58,9 +63,9 @@ print(is_valid_tictactoe(["XO ", " X ", " "]))
 
 print(the_sequence(1))
 
-
 def test():
-    valid_board = [["5", "3", ".", ".", "7", ".", ".", ".", "."]
+    valid_board = [
+                  ["5", "3", ".", ".", "7", ".", ".", ".", "."]
                 , ["6", ".", ".", "1", "9", "5", ".", ".", "."]
                 , [".", "9", "8", ".", ".", ".", ".", "6", "."]
                 , ["8", ".", ".", ".", "6", ".", ".", ".", "3"]
@@ -70,7 +75,8 @@ def test():
                 , [".", ".", ".", "4", "1", "9", ".", ".", "5"]
                 , [".", ".", ".", ".", "8", ".", ".", "7", "9"]]
 
-    invalid_board_col = [["5", "3", ".", ".", "7", ".", ".", ".", "."]
+    invalid_board_col = [
+                  ["5", "3", ".", ".", "7", ".", ".", ".", "."]
                 , ["6", ".", ".", "1", "9", "5", ".", ".", "."]
                 , [".", "9", "8", ".", ".", ".", ".", "6", "."]
                 , ["6", ".", ".", ".", "6", ".", ".", ".", "3"]
@@ -80,7 +86,8 @@ def test():
                 , [".", ".", ".", "4", "1", "9", ".", ".", "5"]
                 , [".", ".", ".", ".", "8", ".", ".", "7", "9"]]
 
-    invalid_board_line = [["5", "3", ".", ".", "7", ".", ".", ".", "."]
+    invalid_board_line = [
+                  ["5", "3", ".", ".", "7", ".", ".", ".", "."]
                 , ["6", ".", ".", "1", "6", "5", ".", ".", "."]
                 , [".", "9", "8", ".", ".", ".", ".", "6", "."]
                 , ["5", ".", ".", ".", "6", ".", ".", ".", "3"]
@@ -89,11 +96,28 @@ def test():
                 , [".", "6", ".", ".", ".", ".", "2", "8", "."]
                 , [".", ".", ".", "4", "1", "9", ".", ".", "5"]
                 , [".", ".", ".", ".", "8", ".", ".", "7", "9"]]
+    invalid_board_box = [
+                  ["5", "3", ".", ".", "7", ".", ".", ".", "."]
+                , ["6", ".", ".", "1", "9", "5", ".", ".", "."]
+                , [".", "9", "8", ".", ".", ".", ".", "6", "."]
+                , ["8", ".", ".", ".", "6", ".", ".", ".", "3"]
+                , ["4", ".", ".", "8", ".", "3", ".", ".", "1"]
+                , ["7", ".", ".", ".", "2", ".", ".", ".", "6"]
+                , [".", "6", ".", ".", ".", ".", "2", "8", "7"]
+                , [".", ".", ".", "4", "1", "9", ".", ".", "5"]
+                , [".", ".", ".", ".", "8", ".", ".", "7", "9"]]
+
+
     tictactoe_valid = ["XO ", " X ", " "]
     tictactoe_not_valid = ["XOX", " X ", " "]
     tictactoe_invalid = ["XOO", " X ", " "]
 
+    print (is_valid_sudoku (valid_board))
+    print (is_valid_sudoku (invalid_board_col))
+    print (is_valid_sudoku (invalid_board_line))
+    print (is_valid_sudoku (invalid_board_box))
 
+test()
 
 
 
