@@ -14,12 +14,12 @@ def is_valid_sudoku(board):
         :return res (bool) if the board is good or not"""
     for i in range(9):
         # col = regroup the i^th colomn
-        # box = regroup the i^th 3 x 3 sub-boxe 
+        # box = regroup the i^th 3 x 3 sub-boxe
         col = [board[k][i] for k in range(9)]
         box = [board[(k%3)+3*(i//3)][(k//3)+3*(i%3)] for k in range(9)]
         for j in range(9):
             # verify there is no tuples
-            if board[i].count(j) > 1 or col.count(j) > 1 or box.count(j) > 1:
+            if board[i].count(str(j)) > 1 or col.count(str(j)) > 1 or box.count(str(j)) > 1:
                 return False
     return True
 
@@ -42,7 +42,7 @@ def next_term(a):
             count = 1
     res.append(count)
     res.append(temp)
-    return int("".join(list(map(str, res))))
+    return "".join(list(map(str, res)))
 
 
 def is_valid_tictactoe(board):
@@ -57,9 +57,7 @@ def is_valid_tictactoe(board):
     return X >= O and X - O <= 1
 
 
-print(is_valid_tictactoe(["XO ", " X ", " "]))
 
-print(the_sequence(1))
 
 def test():
     valid_board = [
@@ -114,9 +112,7 @@ def test():
     print (is_valid_sudoku (invalid_board_col))
     print (is_valid_sudoku (invalid_board_line))
     print (is_valid_sudoku (invalid_board_box))
-
+    print(is_valid_tictactoe(["XO ", " X ", " "]))
+    print(the_sequence(1))
 test()
-
-
-
 
